@@ -1,6 +1,6 @@
 package com.upstart.service_impl;
 
-import com.upstart.model.UserModel;
+import com.upstart.model.AppUserModel;
 import com.upstart.repository.UserRepository;
 import com.upstart.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -17,25 +17,25 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public UserModel save(UserModel userModel) {
-        log.info("Updating userModel with id '{}'", userModel);
-        return userRepository.save(userModel);
+    public AppUserModel save(AppUserModel appUserModel) {
+        log.info("Updating appUserModel with id '{}'", appUserModel);
+        return userRepository.save(appUserModel);
     }
 
     @Override
-    public List<UserModel> getAll() {
+    public List<AppUserModel> getAll() {
         log.info("Getting all users");
         return userRepository.findAll();
     }
 
     @Override
-    public UserModel getById(UUID id) {
+    public AppUserModel getById(UUID id) {
         log.info("Getting user by id '{}'", id);
         return userRepository.getById(id);
     }
 
     @Override
-    public UserModel getByEmail(String email) {
+    public AppUserModel getByEmail(String email) {
         log.info("Finding user by email '{}'", email);
         return userRepository.getByEmail(email);
     }

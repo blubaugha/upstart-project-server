@@ -1,19 +1,19 @@
 package com.upstart.service;
 
 
-import com.upstart.model.UserModel;
+import com.upstart.model.AppUserModel;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface UserService {
-    UserModel save(UserModel userModel);
+    AppUserModel save(AppUserModel appUserModel);
 
-    List<UserModel> getAll();
+    List<AppUserModel> getAll();
 
-    UserModel getById(UUID id);
+    AppUserModel getById(UUID id);
 
-    UserModel getByEmail(String email);
+    AppUserModel getByEmail(String email);
 
     void deleteById(UUID id);
 }
