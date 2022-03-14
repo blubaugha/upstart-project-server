@@ -19,12 +19,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public AppUserModel save(AppUserModel appUserModel) {
-        try {
-            // Just to test long requests in the UI
-            Thread.sleep(3000);
-        } catch(InterruptedException e) {
-            log.error("Thread interrupted", e);
-        }
+        simulateWaiting(3000);
 
         if (Strings.isNotEmpty(appUserModel.getEmail())) {
             AppUserModel existingUser = userRepository.getByEmail(appUserModel.getEmail());
@@ -52,6 +47,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public AppUserModel getByEmail(String email) {
+        simulateWaiting(3000);
         log.info("Finding user by email '{}'", email);
         return userRepository.getByEmail(email);
     }
@@ -60,5 +56,14 @@ public class UserServiceImpl implements UserService {
     public void deleteById(UUID id) {
         log.warn("WHOA! Deleting user with id '{}'", id);
         userRepository.deleteById(id);
+    }
+
+    private void simulateWaiting(int milliseconds) {
+        try {
+            // Just to test long requests in the UI
+            Thread.sleep(milliseconds);
+        } catch(InterruptedException e) {
+            log.error("Thread interrupted", e);
+        }
     }
 }
