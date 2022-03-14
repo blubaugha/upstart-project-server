@@ -7,7 +7,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-
 import java.util.Date;
 import java.util.UUID;
 
@@ -24,12 +23,12 @@ public class AbstractBaseModel {
     @Column(updatable = false, nullable = false)
     private UUID id;
 
-    @Column(name = "created_date")
+    @Column(name = "created_date", updatable = false, nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date createdDate;
 
-    @Column(name = "last_modified_date")
+    @Column(name = "last_modified_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date lastModifiedDate;

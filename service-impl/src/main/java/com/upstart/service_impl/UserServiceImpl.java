@@ -4,6 +4,7 @@ import com.upstart.model.AppUserModel;
 import com.upstart.repository.UserRepository;
 import com.upstart.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public AppUserModel save(AppUserModel appUserModel) {
+        try {
+            // Just to test long requests in the UI
+            Thread.sleep(3000);
+        } catch(InterruptedException e) {
+            log.error("Thread interrupted", e);
+        }
+
+        if (Strings.isNotEmpty(appUserModel.getEmail())) {
+            AppUserModel existingUser = userRepository.getByEmail(appUserModel.getEmail());
+
+            if (existingUser != null) {
+                appUserModel.setId(existingUser.getId());
+            }
+        }
+
         log.info("Updating appUserModel with id '{}'", appUserModel);
         return userRepository.save(appUserModel);
     }
