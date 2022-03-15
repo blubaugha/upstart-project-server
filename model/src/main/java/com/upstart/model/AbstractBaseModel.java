@@ -35,7 +35,7 @@ public class AbstractBaseModel {
     @LastModifiedDate
     private Date lastModifiedDate;
 
-    @Column(name = "created_by", nullable = false)
+    @Column(name = "created_by", nullable = false, updatable = false)
     @CreatedBy
     private String createdBy;
 
